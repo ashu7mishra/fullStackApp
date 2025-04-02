@@ -10,7 +10,8 @@ import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import {Link, useLocation} from 'react-router'
+import {Link, useLocation} from 'react-router';
+
 
 export default function Menu() {
   const [open, setOpen] = React.useState(true);
@@ -34,7 +35,7 @@ export default function Menu() {
             </ListSubheader>
         }
         >
-        <ListItemButton onClick={handleClick} component={Link} to="/">
+        <ListItemButton onClick={handleClick} component={Link} to="/" selected={path === '/'}>
             <ListItemIcon>
             <DashboardIcon />
             </ListItemIcon>
@@ -77,7 +78,7 @@ export default function Menu() {
         </ListSubheader>
         }
         >
-        <ListItemButton component={Link} to="/create">
+        <ListItemButton component={Link} to="/create"  selected={path === '/create'}>
             <ListItemIcon>
                 <AddCircleOutlineIcon />
             </ListItemIcon>
