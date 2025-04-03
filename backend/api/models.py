@@ -19,7 +19,7 @@ class League(models.Model):
         return self.name
     
     
-class Characteristics (models.Model):
+class Characteristics(models.Model):
     name = models.CharField(unique=True, max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
