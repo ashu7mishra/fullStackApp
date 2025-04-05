@@ -4,9 +4,10 @@ import TextField from '@mui/material/TextField';
 export default function BasicTextFields({label}) {
   return (
       <TextField 
-            id="standard-basic" 
+            id="standard-basic"
+            sx={{width:'100%'}}
             label= {label} 
-            variant="standard" 
+            variant="outlined" 
         />
   );
 }

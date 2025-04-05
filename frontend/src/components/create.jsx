@@ -3,6 +3,7 @@ import AxiosInstance from "./axios";
 import { Box, Typography } from "@mui/material";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import TextForm from './forms/TextForm';
+import SelectForm from "./forms/SelectForm";
 
 const Create = () => {
     const [country, setCountry] = useState([])
@@ -39,15 +40,32 @@ const Create = () => {
             <Box className={"FormBox"}>
                 <Box className={"FormArea"}>
                     <TextForm
-                        label = {'Club name'}
+                        label = {'Club Name'}
                     />
 
                 </Box>
                 <Box className={"FormArea"}>
+                    <TextForm
+                        label = {'City'}
+                    />
 
                 </Box>
                 <Box className={"FormArea"}>
-
+                    <SelectForm
+                        label={"League"}
+                        options = {league}
+                    />
+                </Box>
+                <Box className={"FormArea"}>
+                    <SelectForm
+                        label={"Country"}
+                        options = {country}
+                    />
+                </Box>
+                <Box className={"FormArea"}>
+                    <TextForm
+                        label = {'Attendance'}
+                    />
                 </Box>
             </Box>
         </div>
