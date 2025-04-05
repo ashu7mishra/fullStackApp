@@ -4,6 +4,9 @@ import { Box, Typography } from "@mui/material";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import TextForm from './forms/TextForm';
 import SelectForm from "./forms/SelectForm";
+import MultiSelectForm from "./forms/MultiSelectForm";
+import DescriptionForm from "./forms/DescriptionForm";
+import Button from '@mui/material/Button';
 
 const Create = () => {
     const [country, setCountry] = useState([])
@@ -42,29 +45,42 @@ const Create = () => {
                     <TextForm
                         label = {'Club Name'}
                     />
-
-                </Box>
-                <Box className={"FormArea"}>
-                    <TextForm
-                        label = {'City'}
-                    />
-
-                </Box>
-                <Box className={"FormArea"}>
-                    <SelectForm
-                        label={"League"}
-                        options = {league}
-                    />
+                    <Box sx={{marginTop:'35px'}}>
+                        <TextForm
+                            label = {'City'}
+                        />
+                    </Box>
+                    <Box sx={{marginTop:'35px'}}>
+                        <SelectForm
+                            label={"League"}
+                            options = {league}
+                        />
+                    </Box>
+                    <Box sx={{marginTop:'35px'}}>
+                        <Button variant="contained" fullWidth>Submit the data</Button>
+                    </Box>
                 </Box>
                 <Box className={"FormArea"}>
                     <SelectForm
                         label={"Country"}
                         options = {country}
                     />
+                    <Box sx={{marginTop:'35px'}}>
+                        <TextForm
+                            label = {'Attendance'}
+                        />
+                    </Box>
+                    <Box sx={{marginTop:'35px'}}>
+                        <MultiSelectForm
+                            label = {'Characteristics'}
+                            options = {characteristics}
+                        />
+                    </Box>
                 </Box>
                 <Box className={"FormArea"}>
-                    <TextForm
-                        label = {'Attendance'}
+                    <DescriptionForm
+                        label = {'Description'}
+                        rows = {9}
                     />
                 </Box>
             </Box>
