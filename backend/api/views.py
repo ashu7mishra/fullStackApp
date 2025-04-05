@@ -36,3 +36,17 @@ class LeagueViewSet(viewsets.ViewSet):
         queryset = League.objects.all()
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
+    
+    
+class FootballClubViewSet(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+    queryset = FootballClub.objects.all()
+    serializer_class = FootballClubSerializer
+    
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
