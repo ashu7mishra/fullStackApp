@@ -7,12 +7,15 @@ import SelectForm from "./forms/SelectForm";
 import MultiSelectForm from "./forms/MultiSelectForm";
 import DescriptionForm from "./forms/DescriptionForm";
 import Button from '@mui/material/Button';
-import {useFormik} from 'formik'
+import {useFormik} from 'formik';
+import * as yup from 'yup';
+import MyMessage from "./forms/Message";
 
 const Create = () => {
     const [country, setCountry] = useState([])
     const [league, setLeague] = useState([])
     const [characteristics, setCharacteristics] = useState([])
+    const [message, setMessage] = useState([])
 
     console.log('country', country)
     console.log('league', league)
@@ -35,6 +38,18 @@ const Create = () => {
         GetData()
     }, [])
 
+    const validationSchema = yup.object({
+        name: yup
+                .string("The name must be text")
+                .required("Name is required"),
+        attendance: yup
+                .number("Attendance must be a number")
+                .required("Attendance is required"),
+        characteristics: yup
+                .array()
+                .min(1, "Select at least one option")
+    })
+
     const formik = useFormik({
         initialValues:{
             name: '',
@@ -45,10 +60,19 @@ const Create = () => {
             league: '',
             characteristics: []
         },
+        validationSchema: validationSchema,
         onSubmit: (values) => {
             AxiosInstance.post('footballclub/', values)
             .then(() => {
-                console.log("successfully save data")
+                console.log("message: ", message)
+                setMessage(
+                    
+                    <MyMessage
+                        
+                        messageText={"You successfully submitted the data to the database!"}
+                        messageColor={"green"}
+                    />
+                )
             })
         }
     })
@@ -60,6 +84,7 @@ const Create = () => {
                     <AddBoxIcon/>
                     <Typography sx={{marginLeft:'5px', fontWeight:'bold'}} variant="subtitle2">Create a new club</Typography>
                 </Box>
+                {message}
 
                 <Box className={"FormBox"}>
                     <Box className={"FormArea"}>
@@ -69,6 +94,8 @@ const Create = () => {
                             value={formik.values.name}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
+                            error={formik.touched.name && Boolean(formik.errors.name)}
+                            helperText={formik.touched.name && formik.errors.name}
                         />
                         <Box sx={{marginTop:'35px'}}>
                             <TextForm
@@ -77,6 +104,8 @@ const Create = () => {
                                 value={formik.values.city}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
+                                error={formik.touched.city && Boolean(formik.errors.city)}
+                                helperText={formik.touched.city && formik.errors.city}
                             />
                         </Box>
                         <Box sx={{marginTop:'35px'}}>
@@ -87,11 +116,14 @@ const Create = () => {
                                 value={formik.values.league}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
+                                error={formik.touched.league && Boolean(formik.errors.league)}
+                                helperText={formik.touched.league && formik.errors.league}
                             />
                         </Box>
                         <Box sx={{marginTop:'35px'}}>
                             <Button type="submit" variant="contained" fullWidth>Submit the data</Button>
                         </Box>
+                        
                     </Box>
                     <Box className={"FormArea"}>
                         <SelectForm
@@ -101,6 +133,8 @@ const Create = () => {
                             value={formik.values.country}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
+                            error={formik.touched.country && Boolean(formik.errors.country)}
+                            helperText={formik.touched.country && formik.errors.country}
                         />
                         <Box sx={{marginTop:'35px'}}>
                             <TextForm
@@ -109,6 +143,8 @@ const Create = () => {
                                 value={formik.values.attendance}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
+                                error={formik.touched.attendance && Boolean(formik.errors.attendance)}
+                                helperText={formik.touched.attendance && formik.errors.attendance}
                             />
                         </Box>
                         <Box sx={{marginTop:'35px'}}>
@@ -119,6 +155,8 @@ const Create = () => {
                                 value={formik.values.characteristics}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
+                                error={formik.touched.characteristics && Boolean(formik.errors.characteristics)}
+                                helperText={formik.touched.characteristics && formik.errors.characteristics}
                             />
                         </Box>
                     </Box>
@@ -130,6 +168,8 @@ const Create = () => {
                             value={formik.values.description}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
+                            error={formik.touched.description && Boolean(formik.errors.description)}
+                            helperText={formik.touched.description && formik.errors.description}
                         />
                     </Box>
                 </Box>
